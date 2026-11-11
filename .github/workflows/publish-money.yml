@@ -1,0 +1,69 @@
+name: 发布小狗钱钱章节
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/data/money-kapitel*.js"
+      - "src/template.html"
+      - "src/build.py"
+  workflow_dispatch:
+    inputs:
+      chapters:
+        description: "要重新生成的章节号，用空格分开（如 3 4）；留空 = 全部"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-money
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 找出要生成的章节
+        id: pick
+        env:
+          BEFORE: ${{ github.event.before }}
+          CHAPTERS: ${{ github.event.inputs.chapters }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            if [ -n "$CHAPTERS" ]; then
+              files=$(for n in $CHAPTERS; do echo "src/data/money-kapitel$n.js"; done)
+            else
+              files=$(ls src/data/money-kapitel*.js)
+            fi
+          elif git diff --name-only "$BEFORE" HEAD -- src/template.html src/build.py | grep -q . ; then
+            files=$(ls src/data/money-kapitel*.js)          # 模板或脚本改了：全部重建
+          else
+            files=$(git diff --name-only --diff-filter=AM "$BEFORE" HEAD -- 'src/data/money-kapitel*.js')
+          fi
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"; echo "$files" >> "$GITHUB_OUTPUT"; echo "EOF" >> "$GITHUB_OUTPUT"
+          echo "将生成：$files"
+
+      - name: 生成并加密
+        if: steps.pick.outputs.files != ''
+        env:
+          MONEY_PASSWORD: ${{ secrets.MONEY_PASSWORD }}
+        run: python3 src/publish.py ${{ steps.pick.outputs.files }}
+
+      - name: 提交结果
+        if: steps.pick.outputs.files != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add money*.html
+          if git diff --cached --quiet; then echo "没有变化"; exit 0; fi
+          git commit -m "自动发布小狗钱钱章节"
+          git push

@@ -22,3 +22,13 @@ npx staticrypt@3.5.4 /tmp/money3.html -p money --short --remember false -d .   #
 ```
 
 然后在 `money-index.html` 里把第 3 章那行从 `<div class="ch off">…待更新…</div>` 改成 `<a class="ch" href="money3.html">…开始读 →</a>`。
+
+## 自动发布（GitHub Actions）
+
+1. 第一次使用：仓库 **Settings → Secrets and variables → Actions → New repository secret**，
+   名称填 `MONEY_PASSWORD`，值填小狗钱钱的页面密码。
+2. 以后只要把 `src/data/money-kapitel3.js` 这样的文件推到 `main`，
+   Actions 就会自动生成加密的 `money3.html`，并在 `money-index.html` 里点亮第 3 章。
+3. 数据文件第一行写成 `// Ein Hund namens Money — Kapitel 3: 章节德语标题 (S. 37–50)`，
+   标题会自动用作页头副标题。
+4. 也可以在 Actions 页面手动运行「发布小狗钱钱章节」，填章节号重新生成。
