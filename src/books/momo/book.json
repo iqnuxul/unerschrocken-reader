@@ -1,0 +1,12 @@
+{
+  "month": "2027-03",
+  "zh": "毛毛",
+  "title": "Momo",
+  "author": "Michael Ende",
+  "tag": "奇幻小说",
+  "note": "灰先生偷走了人们的时间，小女孩毛毛把它找回来。",
+  "color": "#c26a1b",
+  "prefix": "momo",
+  "password_secret": "BOOK_PASSWORD",
+  "chapters": []
+}

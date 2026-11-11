@@ -1,34 +1,65 @@
-# 精读页源文件
+# 图书馆源文件
 
-- `template.html`：精读页模板（明文，句子数据已清空）
-- `build.py`：把一章的数据套进模板，生成明文页面
-- `data/money-kapitel*.js`：小狗钱钱各章数据
+```
+src/
+├── site.py          生成器：书架、目录页、章节精读页
+├── template.html    精读页模板（句子数据已清空）
+└── books/
+    └── <书的文件夹>/
+        ├── book.json             书的信息
+        └── kapitel1.js …         各章数据（也可命名为 money_ch1_data.js）
+```
 
-## 数据格式
+推到 `main` 后，GitHub Actions（「发布图书馆」）会自动：
+生成并加密改动过的章节 → 在目录页点亮章节 → 更新书架首页 → 提交。
+
+## 加一章
+
+把数据文件放进对应书的文件夹，文件名 `kapitel5.js` 或 `money_ch5_data.js`（数字是章节号），推送即可。
+
+数据格式：
 
 ```js
-const PAGE_TITLES = { 25: "四点钟的约定", ... };   // 每页的中文小标题
+// Ein Hund namens Money — Kapitel 5: Moneys früherer Besitzer (S. 63–72)
+const PAGE_TITLES = { 63: "这一页的中文小标题", ... };
 const data = [
 [页码, "德语原句", "中文翻译", [["词条", "释义"], ...], "<b>语法点</b>：讲解"],
 ...
 ];
 ```
 
-## 新增一章
+## 加一本书
 
-```bash
-python3 src/build.py src/data/money-kapitel3.js /tmp/money3.html "第 3 章 · Daryl, der Junge, der viel Geld verdient" money3
-npx staticrypt@3.5.4 /tmp/money3.html -p money --short --remember false -d .   # 生成加密的 money3.html
+新建文件夹 `src/books/<英文短名>/`，放 `book.json`：
+
+```json
+{
+  "month": "2027-03",
+  "zh": "毛毛",
+  "title": "Momo",
+  "author": "Michael Ende",
+  "tag": "奇幻小说",
+  "note": "书架卡片上的一句话简介",
+  "color": "#c26a1b",
+  "cover": "img/momo.png",
+  "prefix": "momo",
+  "password_secret": "BOOK_PASSWORD",
+  "speak_word": "Momo",
+  "chapters": [
+    {"de": "Kapitel 1 德语标题", "zh": "中文标题", "page": 7}
+  ]
+}
 ```
 
-然后在 `money-index.html` 里把第 3 章那行从 `<div class="ch off">…待更新…</div>` 改成 `<a class="ch" href="money3.html">…开始读 →</a>`。
+- `month` 决定书架上的年份和月份；`cover` 可省略，会自动用 `color` 做纯色封面。
+- `prefix` 决定页面文件名：目录 `momo-index.html`，章节 `momo1.html`、`momo2.html`…
+- `chapters` 可以先写空列表 `[]`，有数据的章节会自动出现在目录里。
+- `password_secret` 是密码的 Secret 名。在仓库 **Settings → Secrets and variables → Actions** 里添加同名 Secret。
+  现有：`MONEY_PASSWORD`（小狗钱钱）；其他书默认用 `BOOK_PASSWORD`。
 
-## 自动发布（GitHub Actions）
+## 本地运行
 
-1. 第一次使用：仓库 **Settings → Secrets and variables → Actions → New repository secret**，
-   名称填 `MONEY_PASSWORD`，值填小狗钱钱的页面密码。
-2. 以后只要把 `src/data/money-kapitel3.js` 这样的文件推到 `main`，
-   Actions 就会自动生成加密的 `money3.html`，并在 `money-index.html` 里点亮第 3 章。
-3. 数据文件第一行写成 `// Ein Hund namens Money — Kapitel 3: 章节德语标题 (S. 37–50)`，
-   标题会自动用作页头副标题。
-4. 也可以在 Actions 页面手动运行「发布小狗钱钱章节」，填章节号重新生成。
+```bash
+python3 src/site.py pages                                   # 只更新书架和目录页
+MONEY_PASSWORD=... python3 src/site.py build src/books/money/kapitel3.js
+```

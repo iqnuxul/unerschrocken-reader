@@ -1,0 +1,124 @@
+{
+  "month": "2026-11",
+  "zh": "小狗钱钱",
+  "title": "Ein Hund namens Money",
+  "author": "Bodo Schäfer",
+  "tag": "儿童理财",
+  "note": "一只会说话的狗，教女孩吉娅理财。",
+  "color": "#d2691e",
+  "cover": "img/money.png",
+  "prefix": "money",
+  "password_secret": "MONEY_PASSWORD",
+  "legacy": {
+    "index": "money-index.html",
+    "first_page": "money.html",
+    "first_key": "money"
+  },
+  "chapters": [
+    {
+      "de": "Der weiße Labrador",
+      "zh": "白色拉布拉多",
+      "page": 11
+    },
+    {
+      "de": "Traumdosen und Traumalbum",
+      "zh": "梦想储蓄罐和梦想相册",
+      "page": 25
+    },
+    {
+      "de": "Daryl, der Junge, der viel Geld verdient",
+      "zh": "达瑞尔，一个很会赚钱的男孩",
+      "page": 37
+    },
+    {
+      "de": "Wie mein Cousin viel verdient",
+      "zh": "我表哥怎样赚很多钱",
+      "page": 51
+    },
+    {
+      "de": "Moneys früherer Besitzer",
+      "zh": "钱钱以前的主人",
+      "page": 63
+    },
+    {
+      "de": "Schulden – was meine Eltern falsch machen",
+      "zh": "债务——我爸妈做错了什么",
+      "page": 73
+    },
+    {
+      "de": "Bei Herrn Goldstern",
+      "zh": "在金先生家",
+      "page": 83
+    },
+    {
+      "de": "Frau Trumpf",
+      "zh": "特伦普夫人",
+      "page": 95
+    },
+    {
+      "de": "Das Abenteuer",
+      "zh": "冒险",
+      "page": 103
+    },
+    {
+      "de": "Im alten Keller",
+      "zh": "在旧地窖里",
+      "page": 113
+    },
+    {
+      "de": "Meine Eltern verstehen nicht ...",
+      "zh": "我爸妈不明白……",
+      "page": 123
+    },
+    {
+      "de": "Frau Trumpfs Rückkehr",
+      "zh": "特伦普夫人回来了",
+      "page": 133
+    },
+    {
+      "de": "Die große Krise",
+      "zh": "大危机",
+      "page": 145
+    },
+    {
+      "de": "Der Investmentclub",
+      "zh": "投资俱乐部",
+      "page": 153
+    },
+    {
+      "de": "Die Rede",
+      "zh": "演讲",
+      "page": 165
+    },
+    {
+      "de": "Der Club investiert",
+      "zh": "俱乐部开始投资",
+      "page": 173
+    },
+    {
+      "de": "Die Großeltern streuen das Risiko",
+      "zh": "祖父母分散风险",
+      "page": 185
+    },
+    {
+      "de": "Das Ende des großen Abenteuers",
+      "zh": "大冒险的结局",
+      "page": 197
+    }
+  ],
+  "palette": {
+    "light": [
+      "#d2691e",
+      "#fbe8d6",
+      "#2e7d4f",
+      "#dcefe2"
+    ],
+    "dark": [
+      "#f0a868",
+      "#3d2a1a",
+      "#7fcf9c",
+      "#1d3426"
+    ]
+  },
+  "speak_word": "Money"
+}

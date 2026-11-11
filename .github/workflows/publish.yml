@@ -1,23 +1,23 @@
-name: 发布小狗钱钱章节
+name: 发布图书馆
 
 on:
   push:
     branches: [main]
     paths:
-      - "src/data/money-kapitel*.js"
+      - "src/books/**"
       - "src/template.html"
-      - "src/build.py"
+      - "src/site.py"
   workflow_dispatch:
     inputs:
-      chapters:
-        description: "要重新生成的章节号，用空格分开（如 3 4）；留空 = 全部"
+      files:
+        description: "要重新生成的章节文件（如 src/books/momo/kapitel1.js），空格分开；留空 = 全部"
         required: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: publish-money
+  group: publish-library
   cancel-in-progress: false
 
 jobs:
@@ -36,34 +36,33 @@ jobs:
         id: pick
         env:
           BEFORE: ${{ github.event.before }}
-          CHAPTERS: ${{ github.event.inputs.chapters }}
+          FILES: ${{ github.event.inputs.files }}
         run: |
+          all=$(ls src/books/*/*.js 2>/dev/null | grep -E '(kapitel|_ch)[0-9]+(_data)?\.js$' || true)
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            if [ -n "$CHAPTERS" ]; then
-              files=$(for n in $CHAPTERS; do echo "src/data/money-kapitel$n.js"; done)
-            else
-              files=$(ls src/data/money-kapitel*.js)
-            fi
-          elif git diff --name-only "$BEFORE" HEAD -- src/template.html src/build.py | grep -q . ; then
-            files=$(ls src/data/money-kapitel*.js)          # 模板或脚本改了：全部重建
+            files="${FILES:-$all}"
+          elif git diff --name-only "$BEFORE" HEAD -- src/template.html src/site.py 'src/books/*/book.json' | grep -q . ; then
+            files="$all"
           else
-            files=$(git diff --name-only --diff-filter=AM "$BEFORE" HEAD -- 'src/data/money-kapitel*.js')
+            files=$(git diff --name-only --diff-filter=AM "$BEFORE" HEAD -- 'src/books/*/*.js' | grep -E '(kapitel|_ch)[0-9]+(_data)?\.js$' || true)
           fi
           echo "files<<EOF" >> "$GITHUB_OUTPUT"; echo "$files" >> "$GITHUB_OUTPUT"; echo "EOF" >> "$GITHUB_OUTPUT"
           echo "将生成：$files"
 
-      - name: 生成并加密
+      - name: 生成并加密章节
         if: steps.pick.outputs.files != ''
         env:
-          MONEY_PASSWORD: ${{ secrets.MONEY_PASSWORD }}
-        run: python3 src/publish.py ${{ steps.pick.outputs.files }}
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+        run: python3 src/site.py build ${{ steps.pick.outputs.files }}
+
+      - name: 更新书架和目录页
+        run: python3 src/site.py pages
 
       - name: 提交结果
-        if: steps.pick.outputs.files != ''
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
-          git add money*.html
+          git add -A -- '*.html' ':!src/**'
           if git diff --cached --quiet; then echo "没有变化"; exit 0; fi
-          git commit -m "自动发布小狗钱钱章节"
+          git commit -m "自动发布图书馆"
           git push

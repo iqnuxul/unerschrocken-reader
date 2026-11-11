@@ -1,0 +1,12 @@
+{
+  "month": "2027-04",
+  "zh": "女性心理学",
+  "title": "Die Psychologie der Frau",
+  "author": "Karen Horney",
+  "tag": "心理学经典",
+  "note": "重新理解女性心理，挑战弗洛伊德的旧观念。",
+  "color": "#6d8b3a",
+  "prefix": "psychologie-der-frau",
+  "password_secret": "BOOK_PASSWORD",
+  "chapters": []
+}

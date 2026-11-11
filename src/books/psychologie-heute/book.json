@@ -1,0 +1,12 @@
+{
+  "month": "2027-01",
+  "zh": "今日心理学",
+  "title": "Psychologie Heute",
+  "author": "Monatsmagazin",
+  "tag": "心理学杂志",
+  "note": "德国心理学月刊，把研究讲成日常生活里用得上的话。",
+  "color": "#c23b5a",
+  "prefix": "psychologie-heute",
+  "password_secret": "BOOK_PASSWORD",
+  "chapters": []
+}

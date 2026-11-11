@@ -6,34 +6,61 @@
 <meta name="robots" content="noindex, nofollow">
 <title>德语线上图书馆</title>
 <style>
-:root{color-scheme:light;--ink:#1f1b24;--muted:#6b6672}
+:root{color-scheme:light;--ink:#1f1b24;--muted:#6b6672;--line:#e7e2da}
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
 .wrap{max-width:960px;margin:0 auto;padding:48px 16px 60px;text-align:center}
 h1{font-family:"Songti SC","Noto Serif CJK SC",Georgia,serif;font-weight:700;margin:0;font-size:clamp(34px,7vw,52px);letter-spacing:.04em}
-.de{font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;font-size:24px;color:var(--muted);margin:2px 0 0}
-.sub{color:var(--muted);margin:10px auto 36px;max-width:56ch;font-size:15px}
-.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:28px 40px}
-a.book{display:block;width:260px;color:inherit;text-decoration:none}
-a.book img{display:block;height:330px;width:auto;max-width:100%;margin:0 auto;transition:transform .25s}
-a.book:hover img{transform:translateY(-6px) rotate(-2deg) scale(1.04)}
-a.book b{display:block;margin-top:8px;font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:24px;color:var(--c)}
-a.book i{display:block;font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:17px;color:var(--muted)}
-a.book span{display:block;font-size:13px;color:var(--muted);margin-top:4px}
-footer{color:var(--muted);font-size:13px;margin-top:36px}
-@media (prefers-reduced-motion:reduce){a.book img{transition:none}}
-.credit{margin:-18px 0 30px;font-size:14px;color:var(--muted)}.credit a{color:inherit;border-bottom:1px dotted currentColor;text-decoration:none}
+.de{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-style:italic;font-size:22px;color:var(--muted);margin:2px 0 0}
+.sub{color:var(--muted);margin:10px auto 28px;max-width:56ch;font-size:15px}
+.credit{margin:-12px 0 30px;font-size:14px;color:var(--muted)}.credit a{color:inherit;border-bottom:1px dotted currentColor;text-decoration:none}
 .back{text-align:left;margin:-28px 0 18px;font-size:14px}.back a{color:var(--muted);text-decoration:none}
+footer{color:var(--muted);font-size:13px;margin-top:40px}
+
+.year{display:flex;align-items:baseline;gap:10px;margin:34px 0 14px;text-align:left;border-bottom:2px solid var(--ink);padding-bottom:6px}
+.year b{font-size:30px;font-family:Georgia,serif}.year span{color:var(--muted);font-size:14px}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;text-align:left}
+.bk{display:flex;gap:14px;padding:14px;border:1px solid var(--line);border-radius:14px;color:inherit;text-decoration:none;background:#fff;min-width:0}
+a.bk{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--c);transition:transform .15s}a.bk:hover{transform:translate(-2px,-2px)}
+.bk .cv{flex:0 0 86px;width:86px;height:120px;object-fit:contain;object-position:top;border-radius:6px}
+.ph{background:var(--c);color:#fff;padding:8px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.ph b{font-size:15px;line-height:1.25}.ph i{font-size:11px;font-family:Georgia,serif;line-height:1.2;opacity:.9}.ph span{font-size:10px;opacity:.8}
+.bk .tx{min-width:0;flex:1}
+.bk .m{font-size:13px;font-weight:700;color:var(--c)}
+.bk h3{margin:0;font-size:18px;line-height:1.3}
+.bk .t{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:14px;color:var(--muted);line-height:1.3}
+.bk .a{font-size:12.5px;color:var(--muted);margin-top:2px}.bk .a em{font-style:normal;border:1px solid var(--line);border-radius:999px;padding:0 7px;margin-left:4px}
+.bk p{margin:6px 0 6px;font-size:13px;line-height:1.45}
+.st{display:inline-block;font-size:12px;border-radius:999px;padding:1px 9px;background:#f1eee9;color:var(--muted)}
+a.bk .st{background:var(--c);color:#fff}
+
 </style>
 </head>
 <body><div class="wrap">
 <h1>德语线上图书馆</h1>
 <div class="de">Deutsche Bibliothek</div>
-<div class="sub">逐句精读：点单词发音，中文可遮住自测，每章每页可留言讨论</div>
+<div class="sub">读书会书单 · 逐句精读：点单词发音，中文可遮住自测，每页可留言讨论</div>
 <p class="credit">♥ 为爱发电：<a href="https://afdian.com/a/einwohnervonb612" target="_blank" rel="noopener">小怪</a></p>
-<div class="grid">
-<a class="book" href="unerschrocken.html" style="--c:#ab3466"><img src="img/temple.png" alt="Unerschrocken"><b>Unerschrocken</b><i>她们的传奇 · Pénélope Bagieu</i><span>10 个故事</span></a>
-<a class="book" href="money-index.html" style="--c:#d2691e"><img src="img/money.png" alt="Ein Hund namens Money"><b>Ein Hund namens Money</b><i>小狗钱钱 · Bodo Schäfer</i><span>按章节精读</span></a>
+<div class="year"><b>2026</b><span>10–12 月</span></div>
+<div class="shelf">
+<a class="bk" href="unerschrocken.html" style="--c:#ab3466"><img class="cv" src="img/temple.png" alt="Unerschrocken"><div class="tx"><div class="m">10 月</div><h3>她们的传奇</h3><div class="t">Unerschrocken</div><div class="a">Pénélope Bagieu<em>漫画 · 人物传记</em></div><p>十五位不畏世俗的女性，一人一篇漫画小传。</p><span class="st">10 个故事</span></div></a>
+<a class="bk" href="money-index.html" style="--c:#d2691e"><img class="cv" src="img/money.png" alt="Ein Hund namens Money"><div class="tx"><div class="m">11 月</div><h3>小狗钱钱</h3><div class="t">Ein Hund namens Money</div><div class="a">Bodo Schäfer<em>儿童理财</em></div><p>一只会说话的狗，教女孩吉娅理财。</p><span class="st">2 章已上线</span></div></a>
+<div class="bk" style="--c:#7a6a4f"><div class="cv ph" style="--c:#7a6a4f"><b>鸭子、死神与郁金香</b><i>Ente, Tod und Tulpe</i><span>Wolf Erlbruch</span></div><div class="tx"><div class="m">12 月</div><h3>鸭子、死神与郁金香</h3><div class="t">Ente, Tod und Tulpe</div><div class="a">Wolf Erlbruch<em>绘本</em></div><p>鸭子遇见死神，一段温柔的告别。</p><span class="st">即将开始</span></div></div>
+</div>
+<div class="year"><b>2027</b><span>1–12 月</span></div>
+<div class="shelf">
+<div class="bk" style="--c:#c23b5a"><div class="cv ph" style="--c:#c23b5a"><b>今日心理学</b><i>Psychologie Heute</i><span>Monatsmagazin</span></div><div class="tx"><div class="m">1 月</div><h3>今日心理学</h3><div class="t">Psychologie Heute</div><div class="a">Monatsmagazin<em>心理学杂志</em></div><p>德国心理学月刊，把研究讲成日常生活里用得上的话。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#3b6ea8"><div class="cv ph" style="--c:#3b6ea8"><b>当下的力量</b><i>Jetzt! Die Kraft der Gegenwart</i><span>Eckhart Tolle</span></div><div class="tx"><div class="m">2 月</div><h3>当下的力量</h3><div class="t">Jetzt! Die Kraft der Gegenwart</div><div class="a">Eckhart Tolle<em>心灵成长</em></div><p>活在当下，从思绪里抽身。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#c26a1b"><div class="cv ph" style="--c:#c26a1b"><b>毛毛</b><i>Momo</i><span>Michael Ende</span></div><div class="tx"><div class="m">3 月</div><h3>毛毛</h3><div class="t">Momo</div><div class="a">Michael Ende<em>奇幻小说</em></div><p>灰先生偷走了人们的时间，小女孩毛毛把它找回来。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#6d8b3a"><div class="cv ph" style="--c:#6d8b3a"><b>女性心理学</b><i>Die Psychologie der Frau</i><span>Karen Horney</span></div><div class="tx"><div class="m">4 月</div><h3>女性心理学</h3><div class="t">Die Psychologie der Frau</div><div class="a">Karen Horney<em>心理学经典</em></div><p>重新理解女性心理，挑战弗洛伊德的旧观念。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#b8452b"><div class="cv ph" style="--c:#b8452b"><b>战争之中</b><i>Im Krieg</i><span>Nora Krug</span></div><div class="tx"><div class="m">5 月</div><h3>战争之中</h3><div class="t">Im Krieg</div><div class="a">Nora Krug<em>图像小说</em></div><p>两位普通人在战争中的日记，图文交织。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#4f7f6a"><div class="cv ph" style="--c:#4f7f6a"><b>老白男</b><i>Alte weiße Männer</i><span>Sophie Passmann</span></div><div class="tx"><div class="m">6 月</div><h3>老白男</h3><div class="t">Alte weiße Männer</div><div class="a">Sophie Passmann<em>社会观察 · 对谈</em></div><p>和“老白男”们坐下来聊一聊。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#5b5ea6"><div class="cv ph" style="--c:#5b5ea6"><b>海外之舌</b><i>Überseezungen</i><span>Yoko Tawada</span></div><div class="tx"><div class="m">7 月</div><h3>海外之舌</h3><div class="t">Überseezungen</div><div class="a">Yoko Tawada<em>散文</em></div><p>在语言之间旅行，词语生出新的意思。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#c0392b"><div class="cv ph" style="--c:#c0392b"><b>最小公共现实</b><i>Die kleinste gemeinsame Wirklichkeit</i><span>Mai Thi Nguyen-Kim</span></div><div class="tx"><div class="m">8 月</div><h3>最小公共现实</h3><div class="t">Die kleinste gemeinsame Wirklichkeit</div><div class="a">Mai Thi Nguyen-Kim<em>科普</em></div><p>用科学找到我们都能同意的事实。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#d35400"><div class="cv ph" style="--c:#d35400"><b>下半身自由</b><i>Unten rum frei</i><span>Margarete Stokowski</span></div><div class="tx"><div class="m">9 月</div><h3>下半身自由</h3><div class="t">Unten rum frei</div><div class="a">Margarete Stokowski<em>女性主义</em></div><p>从身体到政治，谈性别与自由。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#a0466e"><div class="cv ph" style="--c:#a0466e"><b>过度纤细的身体</b><i>Corpus Delicti</i><span>Juli Zeh</span></div><div class="tx"><div class="m">10 月</div><h3>过度纤细的身体</h3><div class="t">Corpus Delicti</div><div class="a">Juli Zeh<em>反乌托邦小说</em></div><p>健康至上的国家里，一个女人的反抗。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#4a4a4a"><div class="cv ph" style="--c:#4a4a4a"><b>德国母亲</b><i>Die deutsche Mutter</i><span>Barbara Vinken</span></div><div class="tx"><div class="m">11 月</div><h3>德国母亲</h3><div class="t">Die deutsche Mutter</div><div class="a">Barbara Vinken<em>文化研究</em></div><p>“德国母亲”这一形象从何而来。</p><span class="st">即将开始</span></div></div>
+<div class="bk" style="--c:#2e86ab"><div class="cv ph" style="--c:#2e86ab"><b>原子习惯</b><i>Die 1%-Methode</i><span>James Clear</span></div><div class="tx"><div class="m">12 月</div><h3>原子习惯</h3><div class="t">Die 1%-Methode</div><div class="a">James Clear<em>习惯养成</em></div><p>每天进步一点点，小习惯带来大改变。</p><span class="st">即将开始</span></div></div>
 </div>
 <footer>为爱发电：<a href="https://afdian.com/a/einwohnervonb612" target="_blank" rel="noopener" style="color:inherit">小怪</a><br>仅供语言学习，原作版权归作者与出版社所有。留言需要 GitHub 账号。</footer>
 </div></body></html>
