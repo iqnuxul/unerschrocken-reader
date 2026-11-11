@@ -187,6 +187,33 @@ a.bk{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--c);transition:transf
 .bk p{margin:6px 0 6px;font-size:13px;line-height:1.45}
 .st{display:inline-block;font-size:12px;border-radius:999px;padding:1px 9px;background:#f1eee9;color:var(--muted)}
 a.bk .st{background:var(--c);color:#fff}
+.wish{margin:46px auto 0;max-width:760px;text-align:left;border:2px solid var(--ink);border-radius:18px;padding:22px 22px 10px;box-shadow:5px 5px 0 #d2691e;background:#fffaf3}
+.wish h2{margin:0 0 8px;font-size:24px}
+.wish p{margin:0 0 10px;font-size:15px;line-height:1.65}
+.wish-eg{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-bottom:14px}
+.wish-off{color:var(--muted);font-size:13px}
+"""
+
+WISH = """<section class="wish" id="wish">
+<h2>📮 想读书单 · 投票</h2>
+<p>想和大家一起读哪本德语书？在下面留言推荐，<b>一条留言写一本书</b>：中文名、德语原名、作者，再写一句推荐理由。<br>
+看到也想读的，就在那条留言上点 <b>👍</b> 投一票。读书会会参考票数来定之后的书单。</p>
+<div class="wish-eg">例：<b>《朗读者》Der Vorleser</b> · Bernhard Schlink —— 篇幅不长，适合中级水平，电影也很好看。</div>
+<div id="wishgc"><p class="wish-off">留言区加载中…（需要通过网址打开页面，留言需用 GitHub 账号登录）</p></div>
+</section>
+<script>
+(function(){
+  if(!/^https?:$/.test(location.protocol)) return;
+  var box=document.getElementById("wishgc"); box.innerHTML="";
+  var s=document.createElement("script"); s.src="https://giscus.app/client.js"; s.async=true; s.crossOrigin="anonymous";
+  var a={"data-repo":"iqnuxul/unerschrocken-reader","data-repo-id":"R_kgDOVJoqpg","data-category":"Announcements",
+    "data-category-id":"DIC_kwDOVJoqps4DIcKu","data-mapping":"specific","data-term":"wishlist","data-strict":"1",
+    "data-reactions-enabled":"0","data-emit-metadata":"0","data-input-position":"top","data-theme":"light",
+    "data-lang":"zh-CN","data-loading":"lazy"};
+  for(var k in a) s.setAttribute(k,a[k]);
+  box.appendChild(s);
+})();
+</script>
 """
 
 def build_shelf(books):
@@ -196,7 +223,7 @@ def build_shelf(books):
     out = HEAD.format(title="德语线上图书馆", css=SHELF_CSS)
     out += ('<h1>德语线上图书馆</h1>\n<div class="de">Deutsche Bibliothek</div>\n'
             '<div class="sub">读书会书单 · 逐句精读：点单词发音，中文可遮住自测，每页可留言讨论</div>\n'
-            f'<p class="credit">♥ 为爱发电：{AFDIAN}>小怪</a></p>\n')
+            f'<p class="credit">♥ 为爱发电：{AFDIAN}>小怪</a> · <a href="#wish">📮 推荐想读的书</a></p>\n')
     for y, bs in years.items():
         months = [int(b["month"][5:7]) for b in bs]
         out += f'<div class="year"><b>{y}</b><span>{min(months)}–{max(months)} 月</span></div>\n<div class="shelf">\n'
@@ -211,6 +238,7 @@ def build_shelf(books):
                     f'<div class="a">{esc(b["author"])}' + (f'<em>{esc(b["tag"])}</em>' if b.get("tag") else "") + '</div>'
                     f'<p>{esc(b.get("note", ""))}</p><span class="st">{esc(status)}</span></div></{tag}>\n')
         out += "</div>\n"
+    out += WISH
     open(os.path.join(ROOT, "index.html"), "w", encoding="utf-8").write(out + FOOT)
 
 INDEX_CSS = """

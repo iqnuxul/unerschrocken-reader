@@ -33,6 +33,11 @@ a.bk{border:2px solid var(--ink);box-shadow:4px 4px 0 var(--c);transition:transf
 .bk p{margin:6px 0 6px;font-size:13px;line-height:1.45}
 .st{display:inline-block;font-size:12px;border-radius:999px;padding:1px 9px;background:#f1eee9;color:var(--muted)}
 a.bk .st{background:var(--c);color:#fff}
+.wish{margin:46px auto 0;max-width:760px;text-align:left;border:2px solid var(--ink);border-radius:18px;padding:22px 22px 10px;box-shadow:5px 5px 0 #d2691e;background:#fffaf3}
+.wish h2{margin:0 0 8px;font-size:24px}
+.wish p{margin:0 0 10px;font-size:15px;line-height:1.65}
+.wish-eg{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-bottom:14px}
+.wish-off{color:var(--muted);font-size:13px}
 
 </style>
 </head>
@@ -40,7 +45,7 @@ a.bk .st{background:var(--c);color:#fff}
 <h1>德语线上图书馆</h1>
 <div class="de">Deutsche Bibliothek</div>
 <div class="sub">读书会书单 · 逐句精读：点单词发音，中文可遮住自测，每页可留言讨论</div>
-<p class="credit">♥ 为爱发电：<a href="https://afdian.com/a/einwohnervonb612" target="_blank" rel="noopener">小怪</a></p>
+<p class="credit">♥ 为爱发电：<a href="https://afdian.com/a/einwohnervonb612" target="_blank" rel="noopener">小怪</a> · <a href="#wish">📮 推荐想读的书</a></p>
 <div class="year"><b>2026</b><span>10–12 月</span></div>
 <div class="shelf">
 <a class="bk" href="unerschrocken.html" style="--c:#ab3466"><img class="cv" src="img/temple.png" alt="Unerschrocken"><div class="tx"><div class="m">10 月</div><h3>她们的传奇</h3><div class="t">Unerschrocken</div><div class="a">Pénélope Bagieu<em>漫画 · 人物传记</em></div><p>十五位不畏世俗的女性，一人一篇漫画小传。</p><span class="st">10 个故事</span></div></a>
@@ -62,5 +67,25 @@ a.bk .st{background:var(--c);color:#fff}
 <div class="bk" style="--c:#4a4a4a"><div class="cv ph" style="--c:#4a4a4a"><b>德国母亲</b><i>Die deutsche Mutter</i><span>Barbara Vinken</span></div><div class="tx"><div class="m">11 月</div><h3>德国母亲</h3><div class="t">Die deutsche Mutter</div><div class="a">Barbara Vinken<em>文化研究</em></div><p>“德国母亲”这一形象从何而来。</p><span class="st">即将开始</span></div></div>
 <div class="bk" style="--c:#2e86ab"><div class="cv ph" style="--c:#2e86ab"><b>原子习惯</b><i>Die 1%-Methode</i><span>James Clear</span></div><div class="tx"><div class="m">12 月</div><h3>原子习惯</h3><div class="t">Die 1%-Methode</div><div class="a">James Clear<em>习惯养成</em></div><p>每天进步一点点，小习惯带来大改变。</p><span class="st">即将开始</span></div></div>
 </div>
+<section class="wish" id="wish">
+<h2>📮 想读书单 · 投票</h2>
+<p>想和大家一起读哪本德语书？在下面留言推荐，<b>一条留言写一本书</b>：中文名、德语原名、作者，再写一句推荐理由。<br>
+看到也想读的，就在那条留言上点 <b>👍</b> 投一票。读书会会参考票数来定之后的书单。</p>
+<div class="wish-eg">例：<b>《朗读者》Der Vorleser</b> · Bernhard Schlink —— 篇幅不长，适合中级水平，电影也很好看。</div>
+<div id="wishgc"><p class="wish-off">留言区加载中…（需要通过网址打开页面，留言需用 GitHub 账号登录）</p></div>
+</section>
+<script>
+(function(){
+  if(!/^https?:$/.test(location.protocol)) return;
+  var box=document.getElementById("wishgc"); box.innerHTML="";
+  var s=document.createElement("script"); s.src="https://giscus.app/client.js"; s.async=true; s.crossOrigin="anonymous";
+  var a={"data-repo":"iqnuxul/unerschrocken-reader","data-repo-id":"R_kgDOVJoqpg","data-category":"Announcements",
+    "data-category-id":"DIC_kwDOVJoqps4DIcKu","data-mapping":"specific","data-term":"wishlist","data-strict":"1",
+    "data-reactions-enabled":"0","data-emit-metadata":"0","data-input-position":"top","data-theme":"light",
+    "data-lang":"zh-CN","data-loading":"lazy"};
+  for(var k in a) s.setAttribute(k,a[k]);
+  box.appendChild(s);
+})();
+</script>
 <footer>为爱发电：<a href="https://afdian.com/a/einwohnervonb612" target="_blank" rel="noopener" style="color:inherit">小怪</a><br>仅供语言学习，原作版权归作者与出版社所有。留言需要 GitHub 账号。</footer>
 </div></body></html>
