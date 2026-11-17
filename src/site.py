@@ -91,7 +91,7 @@ def build_page(b, n, datafile, out):
     pages = "const PAGES = {\n" + ",\n".join(f"  {k}: {json.dumps(v, ensure_ascii=False)}" for k, v in sorted(titles.items())) + "\n};"
     h = h.replace("const PAGES = {\n};", pages, 1).replace("const S = [\n];", "const S = [\n" + body + "\n];", 1)
     info = chapter_info(b, n)
-    sub = f"第 {n} 章 · {info['de']}"
+    sub = f"{info['label']} · {info['de']}" if info.get("label") else f"第 {n} 章 · {info['de']}"
     lt, dk = palette(b)
     avatar = (f'<img class="avatar" src="{b["cover"]}" alt="{esc(b["title"])}" style="width:96px">' if b.get("cover") else "")
     rep = [('<title>Wu Zetian 逐句精读</title>', f'<title>{esc(b["title"])} 逐句精读</title>'),
@@ -230,7 +230,8 @@ def build_shelf(books):
         for b in bs:
             link = b.get("link")
             if not link and published(b): link = index_file(b)
-            status = b.get("status") or (f"{len(published(b))} 章已上线" if link else "即将开始")
+            nch = len([n for n in published(b) if not chapter_info(b, n).get("label")])
+            status = b.get("status") or (f"{nch} 章已上线" if link else "即将开始")
             tag = "a" if link else "div"
             href = f' href="{esc(link)}"' if link else ""
             out += (f'<{tag} class="bk"{href} style="--c:{b["color"]}">{cover_html(b)}<div class="tx">'
@@ -247,6 +248,7 @@ INDEX_CSS = """
 a.ch{box-shadow:4px 4px 0 var(--c);transition:transform .15s}a.ch:hover{transform:translate(-2px,-2px)}
 .ch.off{opacity:.5;border-style:dashed}
 .ch .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--c);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+.ch .n.w{flex:0 0 auto;min-width:32px;padding:0 9px;border-radius:999px;font-size:13px}
 .ch .t{flex:1;min-width:0}.ch b{display:block;font-family:"Iowan Old Style",Palatino,Georgia,serif;font-size:18px}.ch i{font-style:normal;color:var(--muted);font-size:14px}
 .ch .p,.ch em{font-size:13px;color:var(--muted);font-style:normal;white-space:nowrap}a.ch em{color:var(--c);font-weight:600}
 @media(max-width:520px){.ch .p{display:none}}
@@ -261,7 +263,8 @@ def build_index(b):
     rows = ""
     for n in nums:
         c = chapter_info(b, n)
-        inner = (f'<span class="n">{n}</span><span class="t"><b>{esc(c["de"])}</b><i>{esc(c.get("zh", ""))}</i></span>'
+        num = f'<span class="n w">{esc(c["label"])}</span>' if c.get("label") else f'<span class="n">{n}</span>'
+        inner = (f'{num}<span class="t"><b>{esc(c["de"])}</b><i>{esc(c.get("zh", ""))}</i></span>'
                  + (f'<span class="p">S. {c["page"]}</span>' if c.get("page") else ""))
         rows += (f'<a class="ch" href="{chapter_file(b, n)}">{inner}<em>开始读 →</em></a>\n' if n in pub
                  else f'<div class="ch off">{inner}<em>待更新</em></div>\n')

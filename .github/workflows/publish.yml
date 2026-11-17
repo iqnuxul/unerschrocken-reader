@@ -53,7 +53,9 @@ jobs:
         if: steps.pick.outputs.files != ''
         env:
           SECRETS_JSON: ${{ toJSON(secrets) }}
-        run: python3 src/site.py build ${{ steps.pick.outputs.files }}
+          FILES: ${{ steps.pick.outputs.files }}
+        # 文件列表是一行一个；放进环境变量再不加引号展开，换行会被当成空格，所有章节一起传给 site.py
+        run: python3 src/site.py build $FILES
 
       - name: 更新书架和目录页
         run: python3 src/site.py pages

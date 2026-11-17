@@ -104,6 +104,12 @@
       "de": "Das Ende des großen Abenteuers",
       "zh": "大冒险的结局",
       "page": 197
+    },
+    {
+      "de": "Nachwort: Auf die eigenen Füße fallen",
+      "zh": "摔倒也能站稳",
+      "page": 205,
+      "label": "后记"
     }
   ],
   "palette": {
